@@ -85,6 +85,23 @@ class StudentsController < ApplicationController
         end
     end
 
+     def search
+        search = params[:search].to_s
+        students = Student.where("name like ? OR email like ?", "%#{search}", "%#{search}")
+        if students.empty?
+            render json:
+            {
+                message: "No student details found"
+            }, status: 404
+        else
+            render json:
+            {
+                message: "Student details found",
+                student: students 
+            }, status: 200
+        end
+    end
+
     private
     def set_student
         student = Student.find_by(id: params[:id])
