@@ -1,9 +1,5 @@
 class StudentsController < ApplicationController
 
-    def new
-        student = Student.new
-    end
-
     def index
         students = Student.all
         if students.empty?
@@ -69,9 +65,10 @@ class StudentsController < ApplicationController
         end 
     end
 
-    def destory
+    def destroy
         student = set_student
-        if student
+        if student.present?
+            student.delete
             render json:
             {
                 message: "Student deleted successfully",
@@ -81,7 +78,7 @@ class StudentsController < ApplicationController
             render json:
             {
                 message: "Student failed to delete"
-            }, status: 400
+            }, status: 404
         end
     end
 
@@ -111,6 +108,6 @@ class StudentsController < ApplicationController
     end
 
     def student_params
-        params.require(:student).permit(:name, :gender, :email)
+        params.require(:student).permit(:name, :email, :gender, :school_id, :branch_id)
     end
 end

@@ -1,8 +1,5 @@
 class SchoolsController < ApplicationController
-    def new
-        new = School.new
-    end
-
+ 
     def index
         schools = School.all
         if schools.empty?
@@ -30,9 +27,6 @@ class SchoolsController < ApplicationController
                 message: "No details found"
             }, status: 404
         end
-    end
-
-    def edit
     end
 
     def update

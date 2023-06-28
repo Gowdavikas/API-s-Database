@@ -1,7 +1,4 @@
 class BranchesController < ApplicationController
-    def new
-        branch = Branch.new
-    end
 
     def index
         branches = Branch.all
